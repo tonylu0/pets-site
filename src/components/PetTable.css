@@ -1,0 +1,25 @@
+/* PetTable.css */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #000000;
+  padding: 8px;
+  text-align: left;
+  color: #000000; /* Set text color to black */
+}
+
+th {
+  background-color: #6f4fe2; /* Set header background to white */
+}
+
+tr:nth-child(even) {
+  background-color: #FFFFFF; /* Set even rows background to white */
+}
+
+tr:nth-child(odd) {
+  background-color: #757575; /* Set odd rows background to white */
+}
+  
