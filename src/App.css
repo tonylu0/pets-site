@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.title-box {
+  /* background-color: white; Sets the background color of the box to white */
+  color: black; /* Sets the text color to black */
+  padding: 20px; /* Adds padding inside the box for spacing around the text */
+  text-align: center; /* Centers the title text inside the box */
+  margin: 0px 0; /* Adds some margin above and below the box for spacing */
+  /* border: 2px solid black; Adds a black border around the box */
+}

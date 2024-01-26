@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MyButton from './components/MyButton';
@@ -37,6 +37,10 @@ function App() {
       });
   };
 
+  useEffect(() => {
+    updatePets();
+  }, []);
+
   const handleNewPet = (newPet) => {
     // Send the new pet data to API
     fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/', {
@@ -65,6 +69,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <div className="title-box">
+          <h1>Pet Database</h1>
+        </div>
         <MyButton onUpdate={updatePets} />
         <PetTable pets={pets} /> {/* Include the PetTable component */}
         <NewPetForm onNewPet={handleNewPet} />

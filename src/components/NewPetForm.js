@@ -50,6 +50,7 @@ function NewPetForm({ onNewPet }) {
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
+            min="1"
             required
           />
         </div>
