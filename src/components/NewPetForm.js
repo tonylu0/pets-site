@@ -23,7 +23,7 @@ function NewPetForm({ onNewPet }) {
 
   return (
     <div className="form-box">
-      <h2 style={{ color: 'black', marginTop: '0px', marginBottom: '5px' }}>Add Pet</h2>
+      <h2 style={{ color: 'black', marginTop: '0px', marginBottom: '4px' }}>Add Pet</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
