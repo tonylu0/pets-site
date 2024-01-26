@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import MyButton from './components/MyButton';
 import PetTable from './components/PetTable';
+import NewPetForm from './components/NewPetForm';
 
 function App() {
   const [pets, setPets] = useState([]); // Initialize pets state
@@ -36,12 +37,37 @@ function App() {
       });
   };
 
+  const handleNewPet = (newPet) => {
+    // Send the new pet data to API
+    fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPet),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle the successful addition of a new pet
+      updatePets();
+    })
+    .catch(error => {
+      alert('Error adding new pet:', error);
+    });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <MyButton onUpdate={updatePets} />
         <PetTable pets={pets} /> {/* Include the PetTable component */}
+        <NewPetForm onNewPet={handleNewPet} />
       </header>
     </div>
   );

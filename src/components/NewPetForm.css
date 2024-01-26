@@ -1,0 +1,15 @@
+.form-box {
+    border: 2px solid #000; /* Keeps the border you defined */
+    padding: 20px; /* Keeps the padding you defined */
+    margin: 20px 0; /* Keeps the margin you defined */
+    border-radius: 10px; /* Keeps the border-radius you defined */
+    background-color: #f0f0f0; /* Change the color as you prefer */
+}
+  
+.form-group {
+margin-bottom: 15px; /* Keeps the spacing between form groups */
+}
+
+label {
+    color: #000; /* Sets the text color to black */
+}
