@@ -45,3 +45,9 @@
   margin: 0px 0; /* Adds some margin above and below the box for spacing */
   /* border: 2px solid black; Adds a black border around the box */
 }
+
+.forms-container {
+  display: flex; /* Enables Flexbox layout */
+  justify-content: space-around; /* Spreads the child elements evenly with space around them */
+  align-items: flex-start; /* Aligns items at the start of the cross axis */
+}

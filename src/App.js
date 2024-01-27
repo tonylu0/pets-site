@@ -103,8 +103,10 @@ function App() {
         </div>
         <MyButton onUpdate={updatePets} />
         <PetTable pets={pets} /> {/* Include the PetTable component */}
-        <NewPetForm onNewPet={handleNewPet} />
-        <DeletePetForm onDeletePet={handleDeletePet} />
+        <div className="forms-container">
+          <NewPetForm onNewPet={handleNewPet} />
+          <DeletePetForm onDeletePet={handleDeletePet} />
+        </div>
       </header>
     </div>
   );
