@@ -5,12 +5,18 @@ import MyButton from './components/MyButton';
 import PetTable from './components/PetTable';
 import NewPetForm from './components/NewPetForm';
 import DeletePetForm from './components/DeletePetForm';
+import UpdatePetForm from './components/UpdatePetForm';
 
 function App() {
   const [pets, setPets] = useState([]); // Initialize pets state
 
-  // Function to update pets data
-  const updatePets = () => {
+  // Update table on first website load
+  useEffect(() => {
+    refreshPetTable();
+  }, []);
+
+  // Function to update pets table
+  const refreshPetTable = () => {
     fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/')
       .then(response => {
         if (!response.ok) {
@@ -30,7 +36,6 @@ function App() {
   
         // Update the state with the sorted and filtered pets data
         setPets(filteredItems);
-        console.log('Data received from API:', filteredItems);
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -38,17 +43,29 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    updatePets();
-  }, []);
 
-  const handleNewPet = (newPet) => {
+  const handleGetPet = (ID) => {
+    // Send the new pet data to API
+    return fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/' + ID)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Return the data for further processing
+    })
+    .catch(error => {
+      console.error('Error getting pet:', error);
+      throw error; // Rethrow error for further handling
+    });
+  };
+
+  const handlePostPet = (newPet) => {
     // Send the new pet data to API
     fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify(newPet),
     })
     .then(response => {
@@ -58,22 +75,40 @@ function App() {
       return response.json();
     })
     .then(data => {
+      refreshPetTable();
       alert('Pet added: ' + JSON.stringify(newPet));
-      updatePets(); // Refresh table
     })
     .catch(error => {
       alert('Error adding new pet:', error);
     });
   };
 
+  const handlePutPet = (ID, updatePet) => {
+    // Send the new pet data to API
+    fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/' + ID, {
+      method: 'PUT',
+      body: JSON.stringify(updatePet),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      refreshPetTable();
+      alert('Pet updated: ' + JSON.stringify(updatePet));
+    })
+    .catch(error => {
+      console.error('Error updating pet:', error);
+      alert('Failed to update pet: ' + error.message);
+    });
+  };
+
   const handleDeletePet = (deletePet) => {
     // Send the new pet data to API
     fetch('https://zrsfhdj0q8.execute-api.us-east-1.amazonaws.com/prod/Pets/' + deletePet, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(deletePet),
+      method: 'DELETE'
     })
     .then(response => {
       if (!response.ok) {
@@ -83,11 +118,11 @@ function App() {
     })
     .then(data => {
       if (data.Attributes) {
+        refreshPetTable();
         alert('Pet deleted: ' + JSON.stringify(data.Attributes));
       } else {
         alert('Pet not found or already deleted.');
       }
-      updatePets(); // Refresh table
     })
     .catch(error => {
       alert('Error deleting pet:', error);
@@ -101,10 +136,11 @@ function App() {
         <div className="title-box">
           <h1>Pet Database</h1>
         </div>
-        <MyButton onUpdate={updatePets} />
+        <MyButton onUpdate={refreshPetTable} />
         <PetTable pets={pets} /> {/* Include the PetTable component */}
         <div className="forms-container">
-          <NewPetForm onNewPet={handleNewPet} />
+          <NewPetForm onNewPet={handlePostPet} />
+          <UpdatePetForm onGetPet={handleGetPet} onUpdatePet={handlePutPet} />
           <DeletePetForm onDeletePet={handleDeletePet} />
         </div>
       </header>
