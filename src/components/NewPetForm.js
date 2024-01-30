@@ -12,7 +12,7 @@ function NewPetForm({ onNewPet }) {
     // Construct the new pet object
     const newPet = { name: name, type: type, age: parseInt(age, 10) };
 
-    // Call the function passed from the parent component to handle the new pet
+    // Call passed in function to handle API call for creating new pet
     onNewPet(newPet);
 
     // Clear the form fields

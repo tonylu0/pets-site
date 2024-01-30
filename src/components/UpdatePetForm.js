@@ -11,6 +11,20 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
   const handleGetPet = (e) => {
     e.preventDefault(); // Prevent the default form submit action
 
+    // Reject invalid PetIDs
+    if (ID === '') {
+      console.log("PetID must not be blank")
+      alert("PetID must not be blank");
+      setID('');
+      return;
+    } else if (ID < 1) {
+      console.log("PetID must be > 0")
+      alert("PetID must be > 0");
+      setID('');
+      return;
+    }
+
+    // Use passed in function onGetPet to fetch pet using API
     onGetPet(ID).then(pet => {
       console.log(JSON.stringify(pet.Item));
       setName(pet.Item.Name);
@@ -18,8 +32,15 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
       setAge(pet.Item.Age.toString()); // Explicitly show age is stored as a string in react
     })
     .catch(error => {
-      console.log(error);
-      alert("Pet with PetID " + ID + " does not exist");
+      if (ID === '') {
+        console.log("PetID must not be blank")
+        alert("PetID must not be blank");
+      } else {
+        console.log(error);
+        alert("Pet with PetID " + ID + " does not exist");
+      }
+
+      // Reset fields after submission
       setName('');
       setType('');
       setAge('');
@@ -30,8 +51,8 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
   const handleUpdatePet = (e) => {
     e.preventDefault(); // Prevent the default form submit action
 
-    const updatePet = { name: name, type: type, age: parseInt(age, 10) };
-    onUpdatePet(ID, updatePet);
+    const updatePet = { name: name, type: type, age: parseInt(age, 10) }; // Convert age to int for API
+    onUpdatePet(ID, updatePet); // Use passed in function onUpdatePet to update pet using API
 
     setName('');
     setType('');
@@ -41,7 +62,9 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
   return (
     <div className="form-box">
       <h2 style={{ color: 'black', marginTop: '0px', marginBottom: '4px' }}>Update Pet</h2>
-      <form>
+      <form onSubmit={handleUpdatePet}>
+
+        {/* Get PetID */}
         <div className="form-group">
           <label htmlFor="ID">ID:</label>
           <input
@@ -49,18 +72,12 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
             type="number"
             value={ID}
             onChange={(e) => {
-              const newID = e.target.value;
-              if (newID >= 1) {
-                setID(newID);
-              } else {
-                alert("ID must be greater than 0");
-                setID('');
-              }
+              setID(e.target.value);
             }}
             required
           />
         </div>
-        <button onClick={handleGetPet}>Get Pet</button> {/* Button to fetch pet details */}
+        <button onClick={handleGetPet}>Get Pet</button>
         
         {/* Pet details form */}
         <div className="form-group">
@@ -69,6 +86,7 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -77,6 +95,7 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
             id="type"
             value={type}
             onChange={(e) => setType(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -87,9 +106,10 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
             value={age}
             onChange={(e) => setAge(e.target.value)}
             min="1"
+            required
           />
         </div>
-        <button onClick={handleUpdatePet}>Update Pet</button> {/* Button to submit updates */}
+        <button type="submit">Update Pet</button>
       </form>
     </div>
   );

@@ -7,11 +7,8 @@ function DeletePetForm({ onDeletePet }) {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form refresh submit action
 
-    // Construct the new pet object
-    const deletePet = ID;
-
-    // Call the function passed from the parent component to handle the new pet
-    onDeletePet(deletePet);
+    // Call passed in function onDeletePet to handle API call for deleting pet
+    onDeletePet(ID);
 
     // Clear the form fields
     setID('');
