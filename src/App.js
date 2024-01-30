@@ -17,18 +17,8 @@ function App() {
     refreshPetTable(setPets);
   }, []);
 
-  const handleNewPetAndRefresh = async (newPet) => {
-    await handlePostPet(newPet); // Wait for the pet to be posted
-    refreshPetTable(setPets);    // Then refresh the pet table
-  };
-
   const handleUpdatePetAndRefresh = async (ID, updatePetID) => {
     await handlePutPet(ID, updatePetID); // Wait for the pet to be updated
-    refreshPetTable(setPets);    // Then refresh the pet table
-  };
-
-  const handleDeletePetAndRefresh = async (deletePetID) => {
-    await handleDeletePet(deletePetID); // Wait for the pet to be deleted
     refreshPetTable(setPets);    // Then refresh the pet table
   };
 
@@ -40,11 +30,11 @@ function App() {
           <h1>Pet Database</h1>
         </div>
         <MyButton onUpdate={() => refreshPetTable(setPets)} /> {/* Wrap refreshPetTable in another function to pass in setPets*/}
-        <PetTable pets={pets} /> {/* Include the PetTable component */}
+        <PetTable pets={pets} /> {/* Pets Table */}
         <div className="forms-container">
-          <NewPetForm onNewPet={handleNewPetAndRefresh} />
-          <UpdatePetForm onGetPet={handleGetPet} onUpdatePet={handleUpdatePetAndRefresh} />
-          <DeletePetForm onDeletePet={handleDeletePetAndRefresh} />
+          <NewPetForm onNewPet={async (newPet) => { await handlePostPet(newPet); refreshPetTable(setPets); }} /> {/* Wait for pet to be created and refresh */}
+          <UpdatePetForm onGetPet={handleGetPet} onUpdatePet={handleUpdatePetAndRefresh} /> {/* Example of using separate function handleUpdatePetAndRefresh instead of inline */}
+          <DeletePetForm onDeletePet={async (deletePetID) => { await handleDeletePet(deletePetID); refreshPetTable(setPets); }} /> {/* Wait for pet to be deleted and refresh */}
         </div>
       </header>
     </div>
