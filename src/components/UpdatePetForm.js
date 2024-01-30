@@ -40,7 +40,8 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
         alert("Pet with PetID " + ID + " does not exist");
       }
 
-      // Reset fields after submission
+      // Reset fields after error
+      setID('');
       setName('');
       setType('');
       setAge('');
@@ -54,6 +55,7 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
     const updatePet = { name: name, type: type, age: parseInt(age, 10) }; // Convert age to int for API
     onUpdatePet(ID, updatePet); // Use passed in function onUpdatePet to update pet using API
 
+    setID('');
     setName('');
     setType('');
     setAge('');
