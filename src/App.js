@@ -30,12 +30,12 @@ function App() {
           <h1>Pet Database</h1>
         </div>
         <MyButton onUpdate={() => refreshPetTable(setPets)} /> {/* Wrap refreshPetTable in another function to pass in setPets*/}
-        <PetTable pets={pets} /> {/* Pets Table */}
         <div className="forms-container">
           <NewPetForm onNewPet={async (newPet) => { await handlePostPet(newPet); refreshPetTable(setPets); }} /> {/* Wait for pet to be created and refresh */}
           <UpdatePetForm onGetPet={handleGetPet} onUpdatePet={handleUpdatePetAndRefresh} /> {/* Example of using separate function handleUpdatePetAndRefresh instead of inline */}
           <DeletePetForm onDeletePet={async (deletePetID) => { await handleDeletePet(deletePetID); refreshPetTable(setPets); }} /> {/* Wait for pet to be deleted and refresh */}
         </div>
+        <PetTable pets={pets} /> {/* Pets Table */}
       </header>
     </div>
   );
