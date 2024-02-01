@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './NewPetForm.css';
+import './NewPetForm.css';
 
 function DeletePetForm({ onDeletePet }) {
   const [ID, setID] = useState('');
