@@ -38,10 +38,8 @@
 }
 
 .title-box {
-  color: black; /* Sets the text color to black */
-  padding: 20px; /* Adds padding inside the box for spacing around the text */
-  text-align: center; /* Centers the title text inside the box */
-  margin: 0px 0; /* Adds some margin above and below the box for spacing */
+  color: black;
+  text-align: center;
 }
 
 .forms-container {
@@ -52,9 +50,9 @@
 }
 
 .forms-container > * { /* Direct children of .forms-container */
-  flex: 1 1 auto; /* This gives each form equal flexibility to grow and shrink */
-  min-width: 250px; /* Replace with the minimum width each form should have */
-  max-width: 400px; /* Replace with the maximum width each form should have */
+  flex: 1 1 auto;
+  min-width: 250px;
+  max-width: 400px;
 }
 
 @media (max-width: 600px) {
@@ -67,4 +65,19 @@
     width: 100%;
     margin-bottom: 10px;
   }
+}
+
+/* Define the keyframes for the spin animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply the animation on hover */
+.text-spin:hover {
+  animation: spin .25s linear; /* Adjust the timing to your preference */
 }

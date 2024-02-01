@@ -9,7 +9,7 @@ function MyButton({ onUpdate }) {
   }
 
   return (
-    <button onClick={handleClick}>
+    <button style={{border: '2px solid gray',}} onClick={handleClick}>
       Click me to refresh Pet table
     </button>
   );

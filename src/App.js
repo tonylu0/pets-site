@@ -36,6 +36,7 @@ function App() {
           <DeletePetForm onDeletePet={async (deletePetID) => { await handleDeletePet(deletePetID); refreshPetTable(setPets); }} /> {/* Wait for pet to be deleted and refresh */}
         </div>
         <PetTable pets={pets} /> {/* Pets Table */}
+        <p className="text-spin">Made with React</p>
       </header>
     </div>
   );

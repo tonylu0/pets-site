@@ -79,6 +79,7 @@ function UpdatePetForm({ onGetPet, onUpdatePet }) {
             required
           />
         </div>
+        
         <button onClick={handleGetPet}>Get Pet</button>
         
         {/* Pet details form */}
