@@ -79,5 +79,5 @@
 
 /* Apply the animation on hover */
 .text-spin:hover {
-  animation: spin .25s linear; /* Adjust the timing to your preference */
+  animation: spin .25s linear; /* Adjust the timing */
 }

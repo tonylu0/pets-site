@@ -1,6 +1,5 @@
-// PetTable.js
 import React from 'react';
-import './PetTable.css'; // Assuming you have a CSS file for styling
+import './PetTable.css';
 
 const PetTable = ({ pets }) => {
   return (
