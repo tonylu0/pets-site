@@ -1,3 +1,23 @@
+## Introduction
+
+Site is currently hosted using AWS Amplify at https://master.d2me4xc262rlfx.amplifyapp.com/
+
+Welcome to my serverless REST API project "pet-site". This personal project aims to increase my understanding of REST APIs as 
+well as javascript front/back end development. The frontend uses the React JS framework, and the backend uses the nodejs18.x 
+Lambda runtime.
+
+The architecture of the application is as below:
+
+AWS Amplify -> API Gateway -> Lambda -> DynamoDB
+
+The definition of the React App can be found at src\App.js
+The functions which call the API can be found at src\services\petService.js
+
+You can find the repositories for the other components of the application here -
+
+API Gateway: https://github.com/tonylu0/pets-api
+Lambda: https://github.com/tonylu0/pets-lambda
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
