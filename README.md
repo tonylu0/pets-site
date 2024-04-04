@@ -11,11 +11,13 @@ The architecture of the application is as below:
 AWS Amplify -> API Gateway -> Lambda -> DynamoDB
 
 The definition of the React App can be found at src\App.js
+
 The functions which call the API can be found at src\services\petService.js
 
-You can find the repositories for the other components of the application here -
+You can find the repositories for the other components of the application below -
 
 API Gateway: https://github.com/tonylu0/pets-api
+
 Lambda: https://github.com/tonylu0/pets-lambda
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
